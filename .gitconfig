@@ -1,0 +1,14 @@
+# add these lines directly to your .gitconfig file. to edit it, you should just need to run `git config -e --global` in your shell to open it in your configured default text editor.
+# to run them, type `git <aliasname>`
+
+[alias]
+  # usage: `git snitch <filepath> <line number>`, prints out the full info of the last commit to touch that line number
+  snitch = "!f() { git blame $1 -L $2,$2 ; }; f"
+  # a push command the way it should work -- pushes the branch, and then correctly configures the settings to track it locally, if necessary
+  pushup = ![[ $(git config "branch.$(git symbolic-ref --short HEAD).merge") = '' ]] && git push -u origin $(git symbolic-ref --short HEAD) || git push
+  # list every local branch which has no remote tracking ref, because the branch has never been pushed to the remote
+  list-local-only-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
+  # deletes every branch outputted by the command above. be careful if you have local work on a branch you haven't pushed to remote yet!
+  delete-local-only-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}' | xargs git branch -D"
+  # deletes all branches which have no more active remote ref; as in they were pushed upstream and then the remote was either merged or deleted
+  gone = ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
