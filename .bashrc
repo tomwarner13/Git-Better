@@ -26,6 +26,8 @@ gfl() {
 	fi
 }
 
+alias gflm='gfl master'
+
 # git-reset-hard-head
 # resets ALL uncommited changes and returns your working tree to the status of the latest commit.
 # great if you just want to blow up all your local work and start over, but beware if you did anything you want to keep!
@@ -39,6 +41,10 @@ alias gsm='git submodule update --init --recursive'
 # git-status
 # tells you the current status of your working tree: which files are changed/added/removed and which are/are not staged for commit
 alias gs='git status'
+
+# git-diff
+# shows you a diff of every file currently changed in the working tree
+alias gd='git diff'
 
 # git-checkout-branch
 # usage: `gcb PROJECT-12345`
