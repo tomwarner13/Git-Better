@@ -60,6 +60,14 @@ gbt() {
         git checkout tags/$1 -b $2
 }
 
+
+# git-merge-tag
+# usage: `gmt TAG_NAME`
+# fetches, then merges the commit (if exists) referenced by the provided tag to the local branch you are currently working on
+gmt() {
+	git fetch && git merge $1
+}
+
 #git-pull-down -- a git pull, but the way it should work all the time
 gpd() {
 	head="$(git rev-parse --abbrev-ref HEAD)"
