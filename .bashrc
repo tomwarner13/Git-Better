@@ -57,7 +57,7 @@ gcb() {
 # usage: `gbt BL_12345.1 PROJECT-42069`
 # checks out the commit pointed to by the provided tag (if it exists) and if successful, starts a new branch with the provided branch name
 gbt() {
-        git checkout tags/$1 -b $2
+        git fetch && git checkout tags/$1 -b $2
 }
 
 
